@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import { View } from "react-native";
+import AppStack from "./src/navigation/appStack";
 
 const App = () => {
-	return <View></View>;
+	return <AppStack />;
 };
 
 export default App;
