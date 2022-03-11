@@ -7,6 +7,8 @@ import { ActivityIndicator, Text, View } from "react-native";
 const Details: React.FC = (prop: any) => {
 	const [loading, setLoading] = React.useState(false);
 	const [asteroid, setAsteroid] = React.useState({});
+	const [noData, setNoData] = React.useState(false);
+
 	function getData() {
 		axios
 			.get(
@@ -14,6 +16,9 @@ const Details: React.FC = (prop: any) => {
 			)
 			.then((res) => {
 				setAsteroid(res.data);
+			})
+			.catch(() => {
+				setNoData(true);
 			})
 			.finally(() => setLoading(false));
 	}
@@ -41,12 +46,18 @@ const Details: React.FC = (prop: any) => {
 						borderRadius: 10,
 					}}
 				>
-					<Text>Name: {asteroid.name}</Text>
-					<Text>NASA JPL URL: {asteroid.nasa_jpl_url}</Text>
-					<Text>
-						Is Potentially Hazardous:
-						{asteroid.is_potentially_hazardous_asteroid ? " Yes" : " No"}
-					</Text>
+					{noData ? (
+						<Text>No asteroid found with that ID</Text>
+					) : (
+						<View>
+							<Text>Name: {asteroid.name}</Text>
+							<Text>NASA JPL URL: {asteroid.nasa_jpl_url}</Text>
+							<Text>
+								Is Potentially Hazardous:
+								{asteroid.is_potentially_hazardous_asteroid ? " Yes" : " No"}
+							</Text>
+						</View>
+					)}
 				</View>
 			)}
 		</View>
