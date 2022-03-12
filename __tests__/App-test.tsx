@@ -26,3 +26,7 @@ jest.mock("@react-navigation/native", () => {
 it("renders <Home/> correctly", () => {
 	renderer.create(<Home />);
 });
+
+it("renders <App/> correctly", () => {
+	renderer.create(<App />);
+});
