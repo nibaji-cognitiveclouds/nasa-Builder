@@ -2,9 +2,10 @@
 
 import axios from "axios";
 import React from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
+import { DetailsProp } from "../types/screens";
 
-const Details: React.FC = (props: any) => {
+const Details: React.FC<DetailsProp> = (props) => {
 	const [loading, setLoading] = React.useState<boolean>(false);
 	const [error, setError] = React.useState<boolean>(false);
 	const [data, setData] = React.useState<Record<string, any>>({});
