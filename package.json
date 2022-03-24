@@ -28,6 +28,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/jest-native": "^4.0.4",
+    "@testing-library/react-native": "^9.0.0",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
     "react-test-renderer": "17.0.1",
@@ -38,9 +40,9 @@
     "preset": "jest-expo",
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
     ]
-  },
-  "resolutions": {
-    "react-native/@jest/create-cache-key-function": "^27.0.2"
   }
 }
