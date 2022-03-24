@@ -3,6 +3,7 @@
 import axios from "axios";
 import React from "react";
 import { View, Text, ActivityIndicator } from "react-native";
+import { styles } from "../styles/screens";
 import { DetailsProp } from "../types/screens";
 
 const Details: React.FC<DetailsProp> = (props) => {
@@ -23,7 +24,7 @@ const Details: React.FC<DetailsProp> = (props) => {
 			});
 	}, []);
 	return (
-		<View>
+		<View style={styles.screen}>
 			{loading ? (
 				<ActivityIndicator />
 			) : error ? (

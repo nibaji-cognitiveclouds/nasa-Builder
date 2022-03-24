@@ -5,6 +5,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React from "react";
 import { Button, TextInput, View } from "react-native";
+import { styles } from "../styles/screens";
 import { Route } from "../types/route";
 
 const Home: React.FC = () => {
@@ -28,16 +29,17 @@ const Home: React.FC = () => {
 	}
 
 	return (
-		<View>
+		<View style={styles.screen}>
 			<TextInput
 				placeholder="Enter Asteroid ID"
 				placeholderTextColor={"black"}
 				onChangeText={(text) => {
 					setText(text);
 				}}
+				style={styles.input}
 			/>
 
-			<View style={{ flexDirection: "row" }}>
+			<View style={styles.buttonsRow}>
 				<Button
 					title="Submit"
 					onPress={() => {
