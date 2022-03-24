@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React from "react";
-import { Button, TextInput, View } from "react-native";
+import { ActivityIndicator, Button, TextInput, View } from "react-native";
 import { styles } from "../styles/screens";
 import { Route } from "../types/route";
 
@@ -49,14 +49,18 @@ const Home: React.FC = () => {
 					}}
 					disabled={text.length > 0 ? false : true}
 				/>
-				<Button
-					title="Random Asteroid"
-					onPress={() => {
-						setRandomLoading(true);
-						getRandomId();
-					}}
-					disabled={randomLoading}
-				/>
+				{randomLoading ? (
+					<ActivityIndicator />
+				) : (
+					<Button
+						title="Random Asteroid"
+						onPress={() => {
+							setRandomLoading(true);
+							getRandomId();
+						}}
+						disabled={randomLoading}
+					/>
+				)}
 			</View>
 		</View>
 	);
