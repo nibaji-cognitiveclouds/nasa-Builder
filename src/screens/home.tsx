@@ -1,14 +1,16 @@
 /** @format */
 
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React from "react";
 import { Button, TextInput, View } from "react-native";
+import { Route } from "../types/route";
 
 const Home: React.FC = () => {
 	const [text, setText] = React.useState<string>("");
 	const [randomLoading, setRandomLoading] = React.useState<boolean>(false);
-	const navigation = useNavigation();
+	const navigation = useNavigation<NativeStackNavigationProp<Route>>();
 
 	function getRandomId() {
 		axios
