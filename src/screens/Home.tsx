@@ -36,7 +36,6 @@ const Home: FC = () => {
 						text: "ok",
 					},
 				]);
-				setLoading(false);
 			})
 			.finally(() => setLoading(false));
 	};
