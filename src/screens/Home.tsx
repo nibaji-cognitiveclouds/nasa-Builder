@@ -3,7 +3,14 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { FC, useState } from "react";
-import { Button, SafeAreaView, TextInput, View } from "react-native";
+import {
+	ActivityIndicator,
+	Alert,
+	Button,
+	SafeAreaView,
+	TextInput,
+	View,
+} from "react-native";
 
 const Home: FC = () => {
 	const [text, setText] = useState<string>("");
@@ -22,7 +29,16 @@ const Home: FC = () => {
 				navigation.navigate("Details", {
 					id: res.data.near_earth_objects[randomNumber].id,
 				});
-			});
+			})
+			.catch(() => {
+				Alert.alert("Error", "Something Went wrong", [
+					{
+						text: "ok",
+					},
+				]);
+				setLoading(false);
+			})
+			.finally(() => setLoading(false));
 	};
 
 	return (
@@ -40,13 +56,17 @@ const Home: FC = () => {
 						navigation.navigate("Details", { id: text });
 					}}
 				/>
-				<Button
-					disabled={loading}
-					title="Random Asteroid"
-					onPress={() => {
-						getRandomAsteroid();
-					}}
-				/>
+				{loading ? (
+					<ActivityIndicator color={"red"} size={20} />
+				) : (
+					<Button
+						disabled={loading}
+						title="Random Asteroid"
+						onPress={() => {
+							getRandomAsteroid();
+						}}
+					/>
+				)}
 			</View>
 		</SafeAreaView>
 	);
