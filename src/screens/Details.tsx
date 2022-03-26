@@ -2,13 +2,7 @@
 
 import axios from "axios";
 import React, { FC, useEffect, useState } from "react";
-import {
-	ActivityIndicator,
-	Alert,
-	SafeAreaView,
-	Text,
-	View,
-} from "react-native";
+import { ActivityIndicator, SafeAreaView, Text, View } from "react-native";
 import { styles } from "../styles/screens";
 import { nasaItem } from "../types/response";
 import { detailsProp } from "../types/screens";
@@ -16,6 +10,7 @@ import { detailsProp } from "../types/screens";
 const Details: FC<detailsProp> = (props) => {
 	const [data, setData] = useState<nasaItem>();
 	const [loading, setLoading] = useState<boolean>(false);
+	const [error, setError] = useState<boolean>(false);
 
 	useEffect(() => {
 		setLoading(true);
@@ -27,11 +22,7 @@ const Details: FC<detailsProp> = (props) => {
 				setData(res.data);
 			})
 			.catch(() => {
-				Alert.alert("Error", "Something Went wrong", [
-					{
-						text: "ok",
-					},
-				]);
+				setError(true);
 			})
 			.finally(() => {
 				setLoading(false);
@@ -42,6 +33,8 @@ const Details: FC<detailsProp> = (props) => {
 		<SafeAreaView testID="details" style={styles.container}>
 			{loading ? (
 				<ActivityIndicator color={"red"} size={20} />
+			) : error ? (
+				<Text>Something Went wrong!</Text>
 			) : (
 				<View>
 					<Text>Name: {data?.name}</Text>
