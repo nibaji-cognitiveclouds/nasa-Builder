@@ -12,6 +12,7 @@ import {
 	TextInput,
 	View,
 } from "react-native";
+import { styles } from "../styles/screens";
 import { routes } from "../types/navigation";
 
 const Home: FC = () => {
@@ -43,13 +44,14 @@ const Home: FC = () => {
 	};
 
 	return (
-		<SafeAreaView testID="home">
+		<SafeAreaView testID="home" style={styles.container}>
 			<TextInput
 				placeholder="Enter Asteroid ID"
 				placeholderTextColor={"grey"}
 				onChangeText={(text) => setText(text)}
+				style={styles.input}
 			/>
-			<View style={{ flexDirection: "row" }}>
+			<View style={styles.buttonsRow}>
 				<Button
 					disabled={text.length == 0}
 					title="Submit"

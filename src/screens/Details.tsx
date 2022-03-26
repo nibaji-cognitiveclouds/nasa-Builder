@@ -9,6 +9,7 @@ import {
 	Text,
 	View,
 } from "react-native";
+import { styles } from "../styles/screens";
 import { nasaItem } from "../types/response";
 import { detailsProp } from "../types/screens";
 
@@ -38,7 +39,7 @@ const Details: FC<detailsProp> = (props) => {
 	}, []);
 
 	return (
-		<SafeAreaView testID="details">
+		<SafeAreaView testID="details" style={styles.container}>
 			{loading ? (
 				<ActivityIndicator color={"red"} size={20} />
 			) : (
