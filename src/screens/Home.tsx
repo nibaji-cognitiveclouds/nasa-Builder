@@ -1,10 +1,55 @@
 /** @format */
 
-import React, { FC } from "react";
-import { SafeAreaView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import React, { FC, useState } from "react";
+import { Button, SafeAreaView, TextInput, View } from "react-native";
 
 const Home: FC = () => {
-	return <SafeAreaView testID="home"></SafeAreaView>;
+	const [text, setText] = useState<string>("");
+	const [loading, setLoading] = useState<boolean>(false);
+
+	const navigation = useNavigation();
+
+	const getRandomAsteroid = () => {
+		setLoading(true);
+		axios
+			.get("https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=DEMO_KEY")
+			.then((res) => {
+				const randomNumber = Math.floor(
+					Math.random() * res.data.near_earth_objects.length
+				);
+				navigation.navigate("Details", {
+					id: res.data.near_earth_objects[randomNumber].id,
+				});
+			});
+	};
+
+	return (
+		<SafeAreaView testID="home">
+			<TextInput
+				placeholder="Enter Asteroid ID"
+				placeholderTextColor={"grey"}
+				onChangeText={(text) => setText(text)}
+			/>
+			<View style={{ flexDirection: "row" }}>
+				<Button
+					disabled={text.length == 0}
+					title="Submit"
+					onPress={() => {
+						navigation.navigate("Details", { id: text });
+					}}
+				/>
+				<Button
+					disabled={loading}
+					title="Random Asteroid"
+					onPress={() => {
+						getRandomAsteroid();
+					}}
+				/>
+			</View>
+		</SafeAreaView>
+	);
 };
 
 export default Home;
