@@ -1,6 +1,7 @@
 /** @format */
 
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import React, { FC, useState } from "react";
 import {
@@ -11,12 +12,13 @@ import {
 	TextInput,
 	View,
 } from "react-native";
+import { routes } from "../types/navigation";
 
 const Home: FC = () => {
 	const [text, setText] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const navigation = useNavigation();
+	const navigation = useNavigation<NativeStackNavigationProp<routes>>();
 
 	const getRandomAsteroid = () => {
 		setLoading(true);

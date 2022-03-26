@@ -9,9 +9,11 @@ import {
 	Text,
 	View,
 } from "react-native";
+import { nasaItem } from "../types/response";
+import { detailsProp } from "../types/screens";
 
-const Details: FC = (props: any) => {
-	const [data, setData] = useState({});
+const Details: FC<detailsProp> = (props) => {
+	const [data, setData] = useState<nasaItem>();
 	const [loading, setLoading] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -41,11 +43,11 @@ const Details: FC = (props: any) => {
 				<ActivityIndicator color={"red"} size={20} />
 			) : (
 				<View>
-					<Text>Name: {data.name}</Text>
-					<Text>Nasa JPl URL: {data.nasa_jpl_url}</Text>
+					<Text>Name: {data?.name}</Text>
+					<Text>Nasa JPl URL: {data?.nasa_jpl_url}</Text>
 					<Text>
 						Is potentially hazardous:{" "}
-						{data.is_potentially_hazardous_asteroid ? "yes" : "no"}
+						{data?.is_potentially_hazardous_asteroid ? "yes" : "no"}
 					</Text>
 				</View>
 			)}
